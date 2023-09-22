@@ -1,0 +1,127 @@
+@font-face {
+	font-family: Manrope;
+	src: url(../assets/Manrope-VariableFont_wght.ttf);
+}
+
+.material-symbols-outlined {
+    color: rgba(0, 0, 0, 0.26);
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}
+
+.green {
+    color: #00fb3b;
+}
+
+h1 {
+    font-size: 42px;
+    line-height: 98%;
+    font-family: Manrope;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 34px;
+    line-height: 100%;
+    font-family: Manrope;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 28px;
+    line-height: 105%;
+    font-family: Manrope;
+    font-weight: bold;
+}
+
+h4 {
+    font-size: 24px;
+    line-height: 140%;
+    font-family: Manrope;
+    font-weight: bold;
+}
+
+p {
+    font-size: 18px;
+    line-height: 155%;
+    font-family: Manrope;
+    font-weight: normal;
+}
+
+.small-text, label {
+    font-size: 14px;
+    line-height: 150%;
+    font-family: Manrope;
+    font-weight: normal;
+}
+
+.line-height-removed {
+    line-height: 0;
+}
+
+.xsmall-text {
+    font-size: 11px;
+    line-height: 150%;
+    font-family: Manrope;
+    font-weight: normal;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.bold-weight {
+    font-weight: bolder;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input {
+    height: 32px;
+    border-radius: 2px;
+    background: #FFF;
+    box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.12);
+}
+
+button {
+    border-radius: 8px;
+    background: #181818;
+    color: #FFF;
+    padding: 15px 25px;
+    width: 100%;
+    text-align: center;
+    font-family: Manrope;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 155%;
+}
+
+button:hover {
+    background: #424242;
+}
+
+button:disabled {
+    background-color: lightgray;
+}
+
+button.small {
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 600;
+}

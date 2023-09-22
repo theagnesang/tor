@@ -1,0 +1,76 @@
+body {
+    padding: 0;
+    margin: 0;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.two-column-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100vh;
+}
+
+.login-img {
+    width: 50vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.flex-box-vertical-center {
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    max-width: 10vw;
+}
+
+.flex-items-wrap {
+    margin: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 480px;
+}
+
+.vertical-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-element-pair {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.horizontal-element-pair {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background-color: rgba(0, 255, 255, 0);
+    line-height: 0;
+}
+
+.create-pw-box, .re-pw-box, .status-message-box {
+    display: none;
+}
+
+.create-pw-box-unhide, .re-pw-box-unhide, .status-message-box-unhide {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px 15px;
+    background-color: #FFFAE2;
+}
