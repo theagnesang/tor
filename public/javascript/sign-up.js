@@ -47,54 +47,49 @@ function hasMinLength(str, length = 8) {
 function updatePasswordCriteria(password) {
     const checks = document.querySelectorAll(".material-symbols-outlined");
 
-    checks[0].classList.toggle('green', hasUppercase(password));
-    checks[1].classList.toggle('green', hasLowercase(password));
-    checks[2].classList.toggle('green', hasDigit(password));
-    checks[3].classList.toggle('green', hasSymbol(password));
-    checks[4].classList.toggle('green', hasMinLength(password));
+    document.querySelector('.uppercase-check').classList.toggle('is-green', hasUppercase(password));
+    document.querySelector('.lowercase-check').classList.toggle('is-green', hasLowercase(password));
+    document.querySelector('.number-check').classList.toggle('is-green', hasDigit(password));
+    document.querySelector('.symbol-check').classList.toggle('is-green', hasSymbol(password));
+    document.querySelector('.character-check').classList.toggle('is-green', hasMinLength(password));
 }
 
 passwordFieldInput.addEventListener('input', function(event) {
     const password = event.target.value;
     updatePasswordCriteria(password);
+    if(rePasswordFieldInput.value) { // Only check matching if the confirmation field is not empty
+        updateMatchCheck(password, rePasswordFieldInput.value);
+    }
 });
 
 rePasswordFieldInput.addEventListener('input', function() {
-    if (passwordFieldInput.value === rePasswordFieldInput.value) {
-        document.querySelectorAll(".material-symbols-outlined")[5].classList.toggle('green');
-    }
+    updateMatchCheck(passwordFieldInput.value, rePasswordFieldInput.value);
 });
+
+function updateMatchCheck(password, confirmation) {
+    const matchCheckIcon = document.querySelector('.match-check');
+    matchCheckIcon.classList.toggle('is-green', password === confirmation);
+}
+
+function areAllChecksGreen() {
+    const checkIcons = document.querySelectorAll('.material-symbols-outlined');
+    return Array.from(checkIcons).every(icon => icon.classList.contains('is-green'));
+}
 
 const observer = new MutationObserver((mutationsList) => {
     for(let mutation of mutationsList) {
         if (mutation.attributeName === 'class') {
-            const target = mutation.target;
-            if (target.classList.contains('material-symbols-outlined')) {
-                if (areAllChecksGreen()) {
-                    document.getElementById("sign-up-btn").disabled = false;
-                } else {
-                    document.getElementById("sign-up-btn").disabled = true;
-                }
+            if (areAllChecksGreen()) {
+                document.getElementById("sign-up-btn").disabled = false;
+            } else {
+                document.getElementById("sign-up-btn").disabled = true;
             }
         }
     }
 });
 
-function areAllChecksGreen() {
-    const checkIcons = document.querySelectorAll('.material-symbols-outlined');
-
-    for (let icon of checkIcons) {
-        if (!icon.classList.contains('green')) {
-            return false;
-        }
-    }
-    return true;
-};
-
 const checkIcons = document.querySelectorAll('.material-symbols-outlined');
-checkIcons.forEach(icon => {
-    observer.observe(icon, { attributes: true, attributeFilter: ['class'] });
-});
+checkIcons.forEach(icon => observer.observe(icon, { attributes: true, attributeFilter: ['class'] }));
 
 document.querySelector('form[name="createAccount"]').addEventListener('submit', function(e) {
     e.preventDefault();  // This stops the form from submitting the traditional way
@@ -107,13 +102,16 @@ document.querySelector('form[name="createAccount"]').addEventListener('submit', 
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         body: new URLSearchParams(formData).toString(),
-    }).then(response => response.text()).then(message => {
-        if (message === "Email already exists") {
+    })
+    
+    .then(response => response.text()) // Convert the response to text in any case
+    .then(message => {
+        if (message === "User created successfully") { // Check for success message from the server
+            window.location.href = '/onboarding'; // Redirect based on the success message
+        } else if (message === "Email already exists") {
             const statusMessageBox = document.querySelector('.status-message-box');
             statusMessageBox.classList.add('status-message-box-unhide');
-        } else {
-            // Handle successful registration here
-            alert("User registered successfully!");
         }
-    });
+    })
+    .catch(error => console.error('Fetch error: ', error));
 });

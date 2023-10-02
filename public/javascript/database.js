@@ -14,10 +14,6 @@ const db = pgp(config);
 
 export default db;
 
-
-
-
-
 db.connect()
     .then(obj => {
         obj.done();  // Close the connection

@@ -12,116 +12,97 @@
     'opsz' 24
 }
 
-.green {
-    color: #00fb3b;
+.section_login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100vh;
 }
 
-h1 {
-    font-size: 42px;
-    line-height: 98%;
-    font-family: Manrope;
-    font-weight: bold;
+.login_img {
+    width: 50vw;
+    height: 100vh;
+    object-fit: cover;
 }
 
-h2 {
-    font-size: 34px;
-    line-height: 100%;
-    font-family: Manrope;
-    font-weight: bold;
+.login_layout {
+    display: flex;
+    flex-direction: column;
+    max-width: 30rem;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    justify-content: center;
+    align-items: center;
 }
 
-h3 {
-    font-size: 28px;
-    line-height: 105%;
-    font-family: Manrope;
-    font-weight: bold;
+.create-pw-box, .re-pw-box, .status-message-box {
+    display: none;
+    margin: 0;
+    padding: 0;
 }
 
-h4 {
-    font-size: 24px;
-    line-height: 140%;
-    font-family: Manrope;
-    font-weight: bold;
+.create-pw-box-unhide, .re-pw-box-unhide, .status-message-box-unhide {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 8px 15px;
+    background-color: #FFFAE2;
 }
 
-p {
-    font-size: 18px;
-    line-height: 155%;
-    font-family: Manrope;
-    font-weight: normal;
-}
-
-.small-text, label {
-    font-size: 14px;
-    line-height: 150%;
-    font-family: Manrope;
-    font-weight: normal;
-}
-
-.line-height-removed {
+.horizontal-element-pair {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background-color: rgba(0, 255, 255, 0);
     line-height: 0;
 }
 
-.xsmall-text {
-    font-size: 11px;
-    line-height: 150%;
-    font-family: Manrope;
-    font-weight: normal;
+.is-green {
+    color: #00fb3b;
 }
 
-.text-align-right {
-    text-align: right;
+
+
+
+.parent-img-onboarding {
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
-.text-align-center {
-    text-align: center;
+.background-img-onboarding {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background-image: url("../assets/onboarding-bg-img.png");
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.bold-weight {
-    font-weight: bolder;
+.onboarding-box {
+    background-color: #FFF;
+    width: 50vw;
+    max-width: 1000px;
 }
 
-a {
-    color: blue;
-    text-decoration: none;
-}
 
-a:hover {
-    text-decoration: underline;
-}
 
-input {
-    height: 32px;
-    border-radius: 2px;
-    background: #FFF;
-    box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.12);
-}
 
-button {
-    border-radius: 8px;
-    background: #181818;
-    color: #FFF;
-    padding: 15px 25px;
-    width: 100%;
-    text-align: center;
-    font-family: Manrope;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 155%;
-}
 
-button:hover {
-    background: #424242;
-}
 
-button:disabled {
-    background-color: lightgray;
-}
 
-button.small {
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 12px;
-    font-weight: 600;
-}
+
+
+
+
+
+
+
+

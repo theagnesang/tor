@@ -26,18 +26,30 @@ document.querySelector('form[name="userLogIn"]').addEventListener('submit', func
             'Content-Type': 'application/x-www-form-urlencoded',
           },
         body: new URLSearchParams(formData).toString(),
-    }).then(response => response.text()).then(message => {
-        if (message === "Invalid credentials") {
-            const statusMessageBox = document.querySelectorAll('.status-message-box')[1];
-            statusMessageBox.classList.add('status-message-box-unhide');
-        } else if (message === "User not found") {
-            const statusMessageBox = document.querySelectorAll('.status-message-box')[0];
-            statusMessageBox.classList.add('status-message-box-unhide');
+        redirect: 'follow' // Add this line to follow redirects
+    }).then(response => {
+        if(response.ok) { // Check if response status is 200-299
+            if(response.url.endsWith('/feed')) {
+                window.location.href = response.url;
+            }
         } else {
-            // Handle successful registration here
-            alert("User signed in successfully!");
+            return response.text(); // Parse the plain text error message
         }
-    });
+    }).then(message => {
+        if (message) { // Ensure that there is a message before processing it
+            if (message === "Invalid credentials") {
+                const statusMessageBox = document.querySelectorAll('.status-message-box')[1];
+                statusMessageBox.classList.add('status-message-box-unhide');
+            } else if (message === "User not found") {
+                const statusMessageBox = document.querySelectorAll('.status-message-box')[0];
+                statusMessageBox.classList.add('status-message-box-unhide');
+            } else {
+                console.log("Unexpected message:", message);
+                alert("Something else happened: " + message);
+            }
+        }
+    })
+    .catch(error => console.error('Fetch error: ', error));
 });
 
 function hideErrorMessages() {
