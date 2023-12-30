@@ -1,0 +1,5 @@
+PGUSER=username #type your username
+PGHOST=localhost #default
+PGPASSWORD=password #type your password
+PGDATABASE=database #type your database name
+PGPORT=5432 #default
