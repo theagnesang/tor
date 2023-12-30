@@ -61,48 +61,21 @@
     color: #00fb3b;
 }
 
-
-
-
-.parent-img-onboarding {
-    position: relative;
-    margin: 0;
-    padding: 0;
-}
-
 .background-img-onboarding {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100vw;
     min-height: 100vh;
     background-image: url("../assets/onboarding-bg-img.png");
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
     background-attachment: fixed;
+}
+
+.onboarding_box-wrapper {
+    background-color: white;
     display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
     justify-content: center;
     align-items: center;
+    padding: 3rem;
 }
-
-.onboarding-box {
-    background-color: #FFF;
-    width: 50vw;
-    max-width: 1000px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
