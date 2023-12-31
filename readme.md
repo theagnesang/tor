@@ -33,30 +33,28 @@ This is a alpha stage. Current there are plans include more functionality to
 5. user can sent a buddy invitation by keying in the user's id. Once the requestee accepted the invite. The buddy feed will be available for both of them.
 
 ## Directory
-1. tor -- main folder, Contain src for node.js and react.js
-> 1.1. public -- styling files and html files for authentication page.
-> 1.2. src  -- contain backend code for authentication page and API route for postgres sql.  
->> 1.2.1 javascript - main folder for all backend files
->>> 1.2.1.1. newsfeed_controller.js -- controller for API route
->>> 1.2.1.2. newsfeed_model.js -- model for the API. Running on postgres SQL query.
->>> 1.2.1.3. newsfeed_database.js -- connector to postgresql database.
-> 1.3  tor-feed -- contain react src
->> 1.3.1 public - styling files and html files for newsfeed page.
->> 1.3.2 src - react modular files for newsfeedpage. All the name of the files represent a functionality element of the newsfeed page.
->> 1.3.3 package-lock.json -- for react.js
->>1.3.4 package.json -- for react.js
->>1.3.5 README.md -- readme from react.js
->1.4  views -- views data for authentication and profiling pages
->1.5 .env -- config file for postgresql database
->1.6 .gitignore - gitignore file
->1.7 package-lock.json -- for node.js
->1.8 package.json -- for node.js
->1.9 readme.md -- information for this project
->1.10 schema.sql -- to populate the database required to run this web app
->1.11 server.js -- main entry file to run the node.js
+1.1. public -- styling files and html files for authentication page.
+1.2. src  -- contain backend code for authentication page and API route for postgres sql.  
+>1.2.1 javascript - main folder for all backend files
+>>1.2.1.1. newsfeed_controller.js -- controller for API route
+>>1.2.1.2. newsfeed_model.js -- model for the API. Running on postgres SQL query.
+>>1.2.1.3. newsfeed_database.js -- connector to postgresql database.
+1.3  tor-feed -- contain react src
+>1.3.1 public - styling files and html files for newsfeed page.
+>1.3.2 src - react modular files for newsfeedpage. All the name of the files represent a functionality element of the newsfeed page.
+>1.3.3 package-lock.json -- for react.js
+>1.3.4 package.json -- for react.js
+>1.3.5 README.md -- readme from react.js
+1.4  views -- views data for authentication and profiling pages
+1.5 .env -- config file for postgresql database
+1.6 .gitignore - gitignore file
+1.7 package-lock.json -- for node.js
+1.8 package.json -- for node.js
+1.9 readme.md -- information for this project
+1.10 schema.sql -- to populate the database required to run this web app
+1.11 server.js -- main entry file to run the node.js
 
 ## Data Flow
-1. All data reside in PostgreSQL.
 >1.1 Database Name -- Authentication
 >1.2 Database Schema -- Auth
 >1.3 Tables
