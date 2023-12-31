@@ -44,9 +44,9 @@ This is a alpha stage. Current there are plans include more functionality to
 1.9 readme.md -- information for this project
 1.10 schema.sql -- to populate the database required to run this web app
 1.11 server.js -- main entry file to run the node.js
->1.2.1 javascript - main folder for all backend files
->1.3.1 public - styling files and html files for newsfeed page.
->1.3.2 src - react modular files for newsfeedpage. All the name of the files represent a functionality element of the newsfeed page.
+ +1.2.1 javascript - main folder for all backend files
+ +1.3.1 public - styling files and html files for newsfeed page.
+ +1.3.2 src - react modular files for newsfeedpage. All the name of the files represent a functionality element of the newsfeed page.
 >1.3.3 package-lock.json -- for react.js
 >1.3.4 package.json -- for react.js
 >1.3.5 README.md -- readme from react.js
