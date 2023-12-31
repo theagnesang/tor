@@ -11,6 +11,7 @@ This is a alpha stage. Current there are plans include more functionality to
 4) use Python Django backend
 5) use firebase for authentication
 5) authentication page to be done on react.
+6) Use Typescript
 
 ####Startup File####
 1. Installing Postgresql 16 and the dependecies from the ./package.json (Node.js dependencies) and ./tor-feed/package.json (React.js dependencies)
