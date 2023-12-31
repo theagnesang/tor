@@ -37,13 +37,13 @@ This is a alpha stage. Current there are plans include more functionality to
 1.2. src  -- contain backend code for authentication page and API route for postgres sql.  
 >1.2.1 javascript - main folder for all backend files
 >>1.2.1.1. newsfeed_controller.js -- controller for API route
->>1.2.1.2. newsfeed_model.js -- model for the API. Running on postgres SQL query.
->>1.2.1.3. newsfeed_database.js -- connector to postgresql database.
+1.2.1.2. newsfeed_model.js -- model for the API. Running on postgres SQL query.
+1.2.1.3. newsfeed_database.js -- connector to postgresql database.
 1.3  tor-feed -- contain react src
 >1.3.1 public - styling files and html files for newsfeed page.
->1.3.2 src - react modular files for newsfeedpage. All the name of the files represent a functionality element of the newsfeed page.
+1.3.2 src - react modular files for newsfeedpage. All the name of the files represent a functionality element of the newsfeed page.
 >1.3.3 package-lock.json -- for react.js
->1.3.4 package.json -- for react.js
+1.3.4 package.json -- for react.js
 >1.3.5 README.md -- readme from react.js
 1.4  views -- views data for authentication and profiling pages
 1.5 .env -- config file for postgresql database
