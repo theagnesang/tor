@@ -1,6 +1,6 @@
-Web Application Documentation
+# Web Application Documentation
 
-####Overview####
+## Overview
 The web application is a accountabiltiy platform where content creators share their idea with an accountability buddy.  
 You can like, favorited post or comments between each other and encourage one another for content ideation, content sharing and content feedback.
 
@@ -13,7 +13,7 @@ This is a alpha stage. Current there are plans include more functionality to
 5) authentication page to be done on react.
 6) Use Typescript
 
-####Startup File####
+## Startup File
 1. Installing Postgresql 16 and the dependecies from the ./package.json (Node.js dependencies) and ./tor-feed/package.json (React.js dependencies)
 2. Run "psql -U username -d database_name -f schema.sql" to create the database for creaTor web app. 
 3. Replace the username, database_name in the ./.env copy. Rename it as ./.env
@@ -22,10 +22,9 @@ This is a alpha stage. Current there are plans include more functionality to
 6. Go to url http://localhost:3000/log-in.
 7. Create your first profile!
 
+~Note - react.js is running on development. 
 
-# Note - react.js is running on development. 
-
-####Flow####
+## Flow
 1. The user starts with either the Login or Sign Up page.
 2. Upon successful login or sign up, new users are taken to a profiling page.
 3. (For new user) In Profiling page, user can put in additional details for their account
@@ -33,14 +32,14 @@ This is a alpha stage. Current there are plans include more functionality to
 4. From the newsfeed page, users can perform various actions like posting, commenting, liking, and saving posts/comments in their private feed.
 5. user can sent a buddy invitation by keying in the user's id. Once the requestee accepted the invite. The buddy feed will be available for both of them.
 
-##Directory##
+## Directory
 1. tor -- main folder, Contain src for node.js and react.js
-    1.1. public -- styling files and html files for authentication page.
-    1.2. src  -- contain backend code for authentication page and API route for postgres sql.  
-        1.2.1 javascript - main folder for all backend files
-            1.2.1.1. newsfeed_controller.js -- controller for API route
-            1.2.1.2. newsfeed_model.js -- model for the API. Running on postgres SQL query.
-            1.2.1.3. newsfeed_database.js -- connector to postgresql database.
+    >1.1. public -- styling files and html files for authentication page.
+    >1.2. src  -- contain backend code for authentication page and API route for postgres sql.  
+       >1.2.1 javascript - main folder for all backend files
+            >>1.2.1.1. newsfeed_controller.js -- controller for API route
+            >>1.2.1.2. newsfeed_model.js -- model for the API. Running on postgres SQL query.
+            >>>1.2.1.3. newsfeed_database.js -- connector to postgresql database.
     1.3  tor-feed -- contain react src
         1.3.1 public - styling files and html files for newsfeed page.
         1.3.2 src - react modular files for newsfeedpage. All the name of the files represent a functionality element of the newsfeed page.
