@@ -132,6 +132,9 @@ dist
 
 
 # custom files
-Include
-node_modules
-.env actual
+Include/
+node_modules/
+archive/
+pw/
+steps/
+Keys

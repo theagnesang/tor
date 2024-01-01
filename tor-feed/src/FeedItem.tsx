@@ -2,7 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faSave, faComment, faBookmark,faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
-const FeedItem = ({ item , feedId, currentTab,refreshFeedItems,user_id ,fetchSavedItems}) => {
+
+interface FeedItemProps {
+  item: FeedItemArray; // Replace FeedItemArray with the actual type of item
+  feedId: UUID | null; // Replace UUID with the actual type, assuming UUID is a string
+  currentTab: string; // Adjust if currentTab has specific possible values like 'private' | 'buddy'
+  refreshFeedItems: () => void; // Assuming this is a function that returns nothing
+  user_id: bigint | null; // Assuming user_id can be bigint or null
+  fetchSavedItems: () => void; // Assuming this is also a function that returns nothing
+}
+
+const FeedItem: React.FC<FeedItemProps> = ({ item, feedId, currentTab, refreshFeedItems, user_id, fetchSavedItems }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [commentContent, setCommentContent] = useState('');
@@ -19,6 +29,7 @@ const FeedItem = ({ item , feedId, currentTab,refreshFeedItems,user_id ,fetchSav
     try {
       let response;
       const requestOptions = {
+        method: 'POST' || 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           user_id: user_id,
@@ -52,6 +63,7 @@ const FeedItem = ({ item , feedId, currentTab,refreshFeedItems,user_id ,fetchSav
     try {
       let response;
       const requestOptions = {
+        method: 'POST' || 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           user_id: user_id,
@@ -205,7 +217,7 @@ const FeedItem = ({ item , feedId, currentTab,refreshFeedItems,user_id ,fetchSav
     >
         <div className={`flex space-y-2 space-x-2`} >
           <div className="h-10 w-10 bg-gray-200 rounded-full flex items-center justify-center">A</div>
-          <div className="font-semibold">{item.user_id}</div>
+          <div className="font-semibold">{item.user_id.toString()}</div>
         <div className="text-sm text-gray-500">{new Date(item.created_at).toLocaleString()}</div>
         </div>
       <div className="text-gray-700">

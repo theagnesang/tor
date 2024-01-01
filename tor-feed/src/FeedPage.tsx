@@ -1,17 +1,17 @@
 // src/FeedPage.js
 import React, { useState, useEffect,useCallback  } from 'react';
-import FeedWindow from './FeedWindow';
-import SideBar from './SideBar';
-import PostMessage from './PostMessage';
+import FeedWindow from './FeedWindow.tsx';
+import SideBar from './SideBar.tsx';
+import PostMessage from './PostMessage.tsx';
 import ToDoList from './ToDoList';
 import ProfileSettings from './Profile';
-import PromptOfTheDay from './PromptOfTheDay';
+import PromptOfTheDay from './PromptOfTheDay.tsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-
-async function fetchFeedId(feedType, userId) {
-  
+    
+async function fetchFeedId(feedType:'private' | 'buddy', userId:bigint) {
+    
   const response = await fetch(`http://localhost:3000/api/UserFeedId?user_id=${userId}`, {
     credentials: 'include'
   });
@@ -34,14 +34,14 @@ async function fetchFeedId(feedType, userId) {
   }
 }
 
-async function fetchFeedItems(feedType, feedId) {
+async function fetchFeedItems(feedType:'private' | 'buddy', feedId:UUID) {
 
-  let url;
-  if (feedType === 'private') {
-    url = `http://localhost:3000/api?private_feedid=${feedId}`;
-  }else {
-    url = `http://localhost:3000/api?shared_feedid=${feedId}`;
-  }
+  let url:string;
+    if (feedType === 'private') {
+      url = `http://localhost:3000/api?private_feedid=${feedId}`;
+    }else {
+      url = `http://localhost:3000/api?shared_feedid=${feedId}`;
+    }
 
   const response = await fetch(url, {
     headers: {
@@ -61,19 +61,19 @@ async function fetchFeedItems(feedType, feedId) {
   
 }
 
-const FeedPage = (toggleTheme) => {
-  const [currentTab, setCurrentTab] = useState('private');
-  const [feedItems, setFeedItems] = useState([]);
-  const [refreshFeed, setRefreshFeed] = useState(false);
-  const [userId, setUserId] = useState(null);
-  const [buddyId, setBuddyId] = useState(null);
-  const [feedId, setFeedId] = useState(null);
-  const [hasBuddy, setHasBuddy] = useState(false);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-  const [savedItems, setSavedItems] = useState([]);
-  const [ProfileView, setProfileView] = useState(false);
-  const [showSavedItems,setShowSavedItems] = useState(false);
-  const [theme, setTheme] = useState('light'); // Assuming 'light' as default
+const FeedPage = () => {
+  const [currentTab, setCurrentTab] = useState<'private' | 'buddy'>('private');
+  const [feedItems, setFeedItems] = useState<FeedItemArray[]>([]);
+  const [refreshFeed, setRefreshFeed] = useState<boolean>(false);
+  const [userId, setUserId] = useState<bigint | null>(null);
+  const [buddyId, setBuddyId] = useState<bigint | null>(null);
+  const [feedId, setFeedId] = useState<UUID | null>(null);
+  const [hasBuddy, setHasBuddy] = useState<boolean | null>(null);
+  const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(true);
+  const [savedItems, setSavedItems] = useState<FeedItemArray[]>([]);
+  const [ProfileView, setProfileView] = useState<boolean>(false);
+  const [showSavedItems,setShowSavedItems] = useState<boolean>(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light'); // Assuming 'light' as default
   const themeClassName = theme === 'dark' ? 'dark-mode' : '';
   
   const fetchSavedItems = useCallback(async () => {
@@ -87,7 +87,7 @@ const FeedPage = (toggleTheme) => {
         throw new Error('Unable to get all saved feed items');
       }
       const savedItemsData = await savedItemsResponse.json();
-      const itemIds = savedItemsData.map(item => item.item_id);
+      const itemIds = savedItemsData.map((item: { item_id: UUID; }) => item.item_id);
       const itemIdsString = itemIds.join(',');
   
       const feedItemsResponse = await fetch(`http://localhost:3000/api/feedItem?item_id=${itemIdsString}`, {
@@ -109,18 +109,17 @@ const FeedPage = (toggleTheme) => {
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
+  
   const fetchBuddyStatus = useCallback(async () => {
     if (userId) {
       try {
-        const userIdInt = parseInt(userId, 10);
-        const response = await fetch(`http://localhost:3000/api/UserFeedId?user_id=${userIdInt}`, {
+        const response = await fetch(`http://localhost:3000/api/UserFeedId?user_id=${userId}`, {
           credentials: 'include'
         });
         const data = await response.json();
-        console.log("calling fetchBuddyStatus", parseInt(data[0].buddy_id, 10));
-        if (parseInt(data[0].buddy_id, 10) !== -1) {
+        if (data[0].buddy_id !== -1) {
           setHasBuddy(true); 
-          setBuddyId(parseInt(data[0].buddy_id, 10));
+          setBuddyId(data[0].buddy_id);
         }
       } catch (error) {
         console.error('Error fetching buddy status:', error);
@@ -132,9 +131,10 @@ const FeedPage = (toggleTheme) => {
     setRefreshFeed(prev => !prev);
   };
   
-  const handleNewPost = (newPost) => {
-    setFeedItems([newPost, ...feedItems]);
+  const handleNewPost = (newPost: FeedItemArray) => {
+    setFeedItems(prevFeedItems => [newPost, ...prevFeedItems]);
   };
+  
 
   useEffect(() => {
     fetchBuddyStatus();
@@ -148,7 +148,7 @@ const FeedPage = (toggleTheme) => {
         });
         if (response.ok) {
           const data = await response.json();
-          setUserId(parseInt(data.user_id,10));
+          setUserId(data.user_id);
         } else {
           throw new Error('Failed to fetch user data');
         }
@@ -163,18 +163,24 @@ const FeedPage = (toggleTheme) => {
   useEffect(() => {
     const fetchAndSetItems = async () => {
       try {
-        const fetchedFeedId = await fetchFeedId(currentTab, userId);
-        if (fetchedFeedId) {
-          const items = await fetchFeedItems(currentTab, fetchedFeedId);
-          setFeedItems(items);
-          setFeedId(fetchedFeedId);
+        if (userId !== null) {
+          const fetchedFeedId = await fetchFeedId(currentTab, userId);
+    
+          if (fetchedFeedId) {
+            const items = await fetchFeedItems(currentTab, fetchedFeedId);
+            setFeedItems(items);
+            setFeedId(fetchedFeedId);
+          } else {
+            console.error("No feedId returned from fetchFeedId");
+          }
         } else {
-          console.error("No feedId returned from fetchFeedId");
+          console.error("userId is null");
         }
       } catch (error) {
         console.error("Error fetching feed items or feedId:", error);
       }
     };
+    
   
     if (userId) { // Assuming you want to run this only if userId is available
       fetchAndSetItems();
@@ -210,8 +216,6 @@ const FeedPage = (toggleTheme) => {
                     setHasBuddy={setHasBuddy}
                     buddyId={buddyId} 
                     setProfileView={setProfileView}
-                    toggleTheme={toggleTheme}
-                    setTheme={setTheme}
                     setShowSavedItems={setShowSavedItems}
                     fetchSavedItems={fetchSavedItems}
             />
@@ -222,7 +226,6 @@ const FeedPage = (toggleTheme) => {
               <div className="item-column-grid-container bg-white shadow p-4 items-center rounded-lg" style={{ maxHeight: '755px', wordWrap: 'break-word', overflowWrap: 'break-word' }}>
                 {/* PostMessage component will go here */}
                 <PostMessage 
-                  items={feedItems} 
                   onPostSubmit={handleNewPost} 
                   currentTab={currentTab} 
                   feedId={feedId}

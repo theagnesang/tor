@@ -12,6 +12,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.16",
+    "firebaseui": "^6.1.0",
     "pg-promise": "^11.5.4",
     "postcss": "^8.4.31",
     "react": "^18.2.0",

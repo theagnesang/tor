@@ -1,7 +1,19 @@
 import React from 'react';
-import FeedItem from './FeedItem'; // Ensure this component is properly defined
+import FeedItem from './FeedItem.tsx'; // Ensure this component is properly defined
 
-const FeedWindow = ({ items, feedId, currentTab, refreshFeedItems, user_id,savedItems,showSavedItems,fetchSavedItems }) => {
+interface FeedWindowProps {
+  items: FeedItemArray[];
+  feedId: UUID | null;
+  currentTab: 'private' | 'buddy';
+  refreshFeedItems: () => void;  // Assuming it's a function with no parameters
+  user_id: bigint | null;
+  savedItems: FeedItemArray[];
+  showSavedItems: boolean;
+  fetchSavedItems: () => void;  // Assuming it's a function with no parameters
+}
+
+
+const FeedWindow: React.FC<FeedWindowProps> = ({ items, feedId, currentTab, refreshFeedItems, user_id, savedItems, showSavedItems, fetchSavedItems }) => {
 
   console.log("Saved items:", savedItems);
   return (

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
-const PostMessage = ({ onPostSubmit, currentTab, feedId, user_id,ProfileView}) => {
+const PostMessage = ({ onPostSubmit, currentTab, feedId, user_id}) => {
   const [content, setContent] = useState('');
 
   // Placeholder values for private_feedid and type

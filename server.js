@@ -96,7 +96,12 @@ app.use(express.static(path.join(__dirname, 'tor-feed/public')));
 
 const unsplashAccess = createApi({ accessKey: process.env.UNSPLASH_ACCESS_KEY });
 
-app.get("/", async (req, res) => {
+
+// app.get('/user-login', (req, res) => {
+//   res.redirect('/');
+// });
+
+app.get("/user-login", async (req, res) => {
   if(req.isAuthenticated()){
       res.redirect("/feed");
   } else {
@@ -105,7 +110,7 @@ app.get("/", async (req, res) => {
           const randomIndex = Math.floor(Math.random() * unsplashImage.response?.results.length);
           const photoURL = unsplashImage.response?.results[randomIndex].urls.raw;
           const photoAltText = unsplashImage.response?.results[randomIndex].alt_description;
-          res.render("index.ejs", {
+          res.render("log-in.ejs", {
               photo: photoURL,
               photoAlt: photoAltText
           });
@@ -161,19 +166,19 @@ app.post('/user-signup', async (req, res) => {
       console.error("Error during registration:", error);
       res.status(500).send("Internal Server Error");
   }
-});
+  });
 
-app.post('/user-login', (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-      try { 
-        return res.status(500).send('Internal Server Error'); 
-      }
-      catch (error) {
-          console.error("Failed to make request:", error.message);
-          res.status(500).send("Failed to fetch activity.");
-      }
-  }
-  );
+// app.post('/user-login', (req, res, next) => {
+//     passport.authenticate('local', (err, user, info) => {
+//       try { 
+//         return res.status(500).send('Internal Server Error'); 
+//       }
+//       catch (error) {
+//           console.error("Failed to make request:", error.message);
+//           res.status(500).send("Failed to fetch activity.");
+//       }
+//   }
+//   )});
 
   app.post('/user-login', (req, res, next) => {
     passport.authenticate('local', async (err, user, info) => {
@@ -198,7 +203,7 @@ app.post('/user-login', (req, res, next) => {
             }
         });
     })(req, res, next);
-});
+  });
 
 
 
@@ -409,9 +414,9 @@ app.route("/path")
 
 
 // The "catchall" handler for client-side routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'tor-feed/src/app.js'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'tor-feed/src/app.js'));
+// });
 
 app.post('/onboarding', async (req, res) => {
   if (!req.isAuthenticated()) {

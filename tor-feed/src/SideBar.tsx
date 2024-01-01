@@ -3,11 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusSquare,faUser, faBell,faPlusSquare, faBookmark, faSignOutAlt, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import AddBuddyModal from './AddBuddyModal';
 
+
+
 const Sidebar = ({ currentTab, onSelectTab, user_id, hasBuddy,setHasBuddy,buddyId,setProfileView,setShowSavedItems,fetchSavedItems}) => {
 
-  const [isModalOpen, setModalOpen] = useState(false);
-  const [buddyRequests, setBuddyRequests] = useState([]);
-  const [showNotifications, setShowNotifications] = useState(false);
+  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [buddyRequests, setBuddyRequests] = useState<BuddyRequestArray[]>([]);
+  const [showNotifications, setShowNotifications] = useState<boolean>(false);
 
   const handleLocalAddBuddyClick = () => {
     setModalOpen(!isModalOpen && !hasBuddy );
@@ -127,7 +129,7 @@ const Sidebar = ({ currentTab, onSelectTab, user_id, hasBuddy,setHasBuddy,buddyI
       <div className="flex items-center space-x-1 p-2 border-gray-300 rounded">
         {buddyRequests.map(request => (
           <div key={request.request_id} className="flex-1 p-1 text-xs border-2 border-gray-300 rounded">
-            <p>User {request.requestor_id} wants to be your buddy.</p>
+            <p>User {request.requestor_id.toString()} wants to be your buddy.</p>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 text-xxs rounded mr-2" onClick={() => respondToBuddyRequest(request.requestor_id, 'accepted')}>Accept</button>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 text-xxs rounded" onClick={() => respondToBuddyRequest(request.requestor_id, 'rejected')}>Reject</button>
           </div>
